@@ -48,18 +48,18 @@ function App() {
   const [formattedTime, setFormattedTime] = useState("");
   const filteredDailies = dailies.filter((daily) => daily.selected);
   const filteredWeeklyBosses = weeklyBosses.filter((boss) => boss.selected);
+
   function getUTCTime() {
-    // Get the current local time
     const now = new Date();
     const currentDay = now.getUTCDay();
-    const daysUntilThursday = (4 - currentDay + 7) % 7; // 4 represents Thursday
+    const daysUntilThursday = (4 - currentDay + 7) % 7;
     const nextThursday = new Date(
       now.getUTCFullYear(),
       now.getUTCMonth(),
       now.getUTCDate() + daysUntilThursday
     );
     nextThursday.setUTCHours(0, 0, 0, 0);
-    // Get the current UTC date and time
+
     const currentUTC = new Date(
       Date.UTC(
         now.getUTCFullYear(),
@@ -71,7 +71,6 @@ function App() {
       )
     );
 
-    // Get the start of the next day in UTC
     const nextUTCDate = new Date(
       Date.UTC(
         now.getUTCFullYear(),
@@ -126,8 +125,8 @@ function App() {
   }
 
   const timeUntilNextDayUTC = getUTCTime();
-  const resetTime = `Reset in : ${timeUntilNextDayUTC.resetHours}:${timeUntilNextDayUTC.resetMinutes}:${timeUntilNextDayUTC.resetSeconds}`;
-  const dayofweek = daysOfWeek[timeUntilNextDayUTC.utcDay - 1];
+  const resetTime = `Daily Reset : ${timeUntilNextDayUTC.resetHours}:${timeUntilNextDayUTC.resetMinutes}:${timeUntilNextDayUTC.resetSeconds}`;
+  const dayofweek = daysOfWeek[timeUntilNextDayUTC.utcDay];
   const thursReset = `Boss Reset : ${timeUntilNextDayUTC.thursHours}:${timeUntilNextDayUTC.thursMinutes}:${timeUntilNextDayUTC.thursSeconds}`;
 
   const clearDailies = () => {
@@ -243,7 +242,12 @@ function App() {
             />
           </div>
         </div>
-        <h1 className="header">Dailies</h1>
+        <h1 className="header section-header" style={{ marginTop: `180px` }}>
+          Dailies
+        </h1>
+        <div className="header-wrapper">
+          <h1 className="header daily-reset-timer">{resetTime} </h1>
+        </div>
         <div className="dailies-container">
           <div className="daily-list arcane-river-dailies">
             <div className="header-wrapper">
@@ -267,7 +271,6 @@ function App() {
                       toggleDaily(daily.name);
                     }}
                   >
-                    {/* <div className={daily.completed ? "green-check" : ""}></div> */}
                     {<div className="dark-filter"></div>}
                     {daily.completed && <div className="darker-filter"></div>}
 
@@ -343,11 +346,11 @@ function App() {
             </ul>
           </div>
         </div>
-        <h1 className="header"> Weekly Bosses</h1>
+        <h1 className="header section-header"> Weekly Bosses</h1>
 
         <div className="weekly-bosses-container">
           <div className="header-wrapper">
-            <h1 className="header thurs-timer">{thursReset}</h1>
+            <h1 className="header thurs-reset-timer">{thursReset}</h1>
           </div>
           <div className="boss-grid-container">
             {filteredWeeklyBosses?.map((boss) => (

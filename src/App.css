@@ -24,31 +24,36 @@ html, body {
   z-index: 0;
 }
 
-.timers{
+.timer-container{
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.formatted-timer, .reset-timer, .thurs-timer{
+.formatted-timer{
   margin: 0;
   font-size: 35px;
 }
 
+.daily-reset-timer {
+  margin-bottom: 30px;
+}
+
 .settings-wrapper {
-  padding: 10px 20px 10px;
+  padding: 10px 10px 10px;
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
   align-items: center;
-  position: sticky;
+  position: fixed;
   top: 0;
   left: 0;
   height: fit-content;
   width: 100%;
   background-color: tan;
   z-index: 1000;
-  position: relative;
+  overflow: auto;
 }
 
 .buttons-wrapper {
@@ -68,10 +73,8 @@ html, body {
   gap: 5px;
 }
 
-.thurs-timer {
-  display: block;
-  box-sizing: border-box;
-  left: 50%;
+.section-header{
+  margin-left: 30px;
 }
 
 .header-wrapper{
@@ -82,7 +85,6 @@ html, body {
 
 .header{
   color: tan;
-  margin-left: 30px;
   text-shadow:
   -1px -1px 0 black,
   1px -1px 0 black,
@@ -91,6 +93,7 @@ html, body {
 }
 
 .list-header {
+  font-size: 30px;
   color: tan;
   text-shadow:
   -1px -1px 0 black,
@@ -145,7 +148,7 @@ html, body {
 
 .text-wrapper {
   position: absolute;
-  z-index: 2; /* Ensure the text is above the black filter */
+  z-index: 2;
 }
 
 .daily-item-text {
@@ -165,7 +168,7 @@ html, body {
   position: absolute;
   left: 0px;
   top: 0px;
-  background-color: rgba(0, 0, 0, 0.3); /* Adjust opacity as needed */
+  background-color: rgba(0, 0, 0, 0.3);
   z-index: 0;
 }
 .darker-filter {
@@ -201,7 +204,7 @@ html, body {
   justify-content: center;
   align-items: center;
   position: relative;
-  border: 1px solid white;
+  border: 1px solid lightgreen;
 }
 
 .boss-box .completedd {
