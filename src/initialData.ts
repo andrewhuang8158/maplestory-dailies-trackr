@@ -1,3 +1,18 @@
+export interface Daily {
+  name: string;
+  text: string;
+  location: string;
+  completed: boolean;
+  selected: boolean;
+}
+
+export interface Boss {
+  name: string;
+  text: string;
+  completed: boolean;
+  selected: boolean;
+}
+
 export const initialWeeklyBosses = [
   { selected: true, name: "czak", completed: false, text: "Chaos Zak" },
   { selected: true, name: "hmag", completed: false, text: "H Magnus" },

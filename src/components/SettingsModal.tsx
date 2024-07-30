@@ -1,19 +1,26 @@
-import React, { useState } from "react";
-import { Modal, Button } from "react-bootstrap";
+import { useState } from "react";
+import { Modal } from "react-bootstrap";
 import "./SettingsModal.css";
+import { Daily, Boss } from "../initialData";
+
+interface SettingsModalProps {
+  dailies: Daily[];
+  setDailies: React.Dispatch<React.SetStateAction<Daily[]>>;
+  weeklyBosses: Boss[];
+  setWeeklyBosses: React.Dispatch<React.SetStateAction<Boss[]>>;
+}
 
 const SettingsModal = ({
   dailies,
   setDailies,
   weeklyBosses,
   setWeeklyBosses,
-}) => {
-  const [show, setShow] = useState(false);
+}: SettingsModalProps) => {
+  const [show, setShow] = useState<boolean>(false);
+  const handleClose = (): void => setShow(false);
+  const handleShow = (): void => setShow(true);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
-  const handleDailyChange = (name) => {
+  const handleDailyChange = (name: string) => {
     setDailies(() =>
       dailies.map((daily) =>
         daily.name === name ? { ...daily, selected: !daily.selected } : daily
@@ -21,7 +28,7 @@ const SettingsModal = ({
     );
   };
 
-  const handleWeeklyBossChange = (name) => {
+  const handleWeeklyBossChange = (name: string) => {
     setWeeklyBosses(() =>
       weeklyBosses.map((boss) =>
         boss.name === name ? { ...boss, selected: !boss.selected } : boss

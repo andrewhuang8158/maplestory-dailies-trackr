@@ -3,7 +3,27 @@ import "./App.css";
 import SettingsModal from "./components/SettingsModal";
 import ScrollToTopButton from "./components/ScrollToTopButton.tsx";
 import "./components/ScrollToTopButton.css";
-import { initialDailies, initialWeeklyBosses } from "./initialData.ts";
+import {
+  initialDailies,
+  initialWeeklyBosses,
+  Daily,
+  Boss,
+} from "./initialData.ts";
+
+interface UTCTime {
+  utcDay: number;
+  utcHours: string;
+  utcMinutes: string;
+  utcSeconds: string;
+  resetHours: string;
+  resetMinutes: string;
+  resetSeconds: string;
+  thursHours: string;
+  thursMinutes: string;
+  thursSeconds: string;
+  timeDifference: number;
+  thursDifference: number;
+}
 
 const daysOfWeek = [
   "Sunday",
@@ -43,13 +63,13 @@ function App() {
     }
   };
 
-  const [dailies, setDailies] = useState(loadDailies);
-  const [weeklyBosses, setWeeklyBosses] = useState(loadWeeklyBosses);
+  const [dailies, setDailies] = useState<Daily[]>(loadDailies);
+  const [weeklyBosses, setWeeklyBosses] = useState<Boss[]>(loadWeeklyBosses);
   const [formattedTime, setFormattedTime] = useState("");
   const filteredDailies = dailies.filter((daily) => daily.selected);
   const filteredWeeklyBosses = weeklyBosses.filter((boss) => boss.selected);
 
-  function getUTCTime() {
+  function getUTCTime(): UTCTime {
     const now = new Date();
     const currentDay = now.getUTCDay();
     const daysUntilThursday = (4 - currentDay + 7) % 7;
@@ -83,8 +103,8 @@ function App() {
     );
 
     // Calculate the difference in milliseconds
-    const timeDifference = nextUTCDate - currentUTC;
-    const thursDifference = nextThursday - currentUTC;
+    const timeDifference = nextUTCDate.getTime() - currentUTC.getTime();
+    const thursDifference = nextThursday.getTime() - currentUTC.getTime();
     // Convert the difference for countdown timer to reset to a more readable format (e.g., hours, minutes, seconds)
     const hours = Math.floor(timeDifference / (1000 * 60 * 60));
     const minutes = Math.floor(
