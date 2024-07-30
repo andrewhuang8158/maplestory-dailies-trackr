@@ -1,10 +1,10 @@
 import { useState } from "react";
 import "./DailyItem.css";
 
-interface Props {
-  name: string;
-  id: number;
-}
+// interface Props {
+//   name: string;
+//   id: number;
+// }
 const DailyItem = ({ name = "daily" }) => {
   const [completed, setCompleted] = useState(false);
   return (
