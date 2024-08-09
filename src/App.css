@@ -204,10 +204,14 @@ html, body {
   justify-content: center;
   align-items: center;
   position: relative;
+  border: 1px solid white;
+}
+
+.completed.boss-box {
   border: 1px solid lightgreen;
 }
 
-.boss-box .completedd {
+.completed-boss {
   border-radius: inherit;
   height: 100%;
   width: 100%;
